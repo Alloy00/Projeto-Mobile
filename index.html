@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exemplo de Mapa</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilos para o mapa */
+    #map {
+      height: 100vh;
+      width: 100%;
+      border: none;
+      box-shadow: none;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- tela de loading
+    <div id="loading" style="z-index: 9999;">Carregando...</div>
+  -->
+
+ <!--visualização do mapa e navbar -->
+
+ <div id="map" name="map" style="z-index: 0;"> 
+<div class="nav">
+    <input class="navstyle" id="input" type="text" placeholder="Digite um local">
+      <ul class="suggestions" style="z-index: 9998;">
+        <li></li>
+        <li>Local 1</li>
+        <li>Local 2</li>
+        <li>Local 3</li>
+      </ul>
+    </div>
+    <div id="toggle-nav" class="floating-button">
+      =
+    </div>
+    
+    <div class="sidebar hidden" style="z-index: 9999;">
+      <ul>
+
+        <li><a href="index.html">Início</a></li>
+        <li><a href="#">Locais</a></li>
+        <li><a href="#">Esportes</a></li>
+      </ul>
+    </div>
+  </div>
+
+ 
+
+   
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    
+    
+
+
+    function initMap() {
+
+      
+      // Criação de icones
+        var Bike = L.icon({
+          iconUrl: './IMG/bicycle-solid.svg',
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+      // Cria o mapa e marcação
+      var map = L.map('map').setView([-23.5489, -46.6388], 13);
+      var marker = L.marker([-8.010253803789722, -34.90282058814886], {icon:Bike})
+      .addTo(map).bindPopup("Local 1", { closeOnClick: false });
+      
+      // Adiciona o layer do OpenStreetMap/ configurações do mapa
+      //Estilo 1:
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+}).addTo(map);
+
+      //Estilo 2:      
+      /*L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        
+      }).addTo(map);*/
+
+      // Verifica se o navegador suporta geolocalização
+      if (navigator.geolocation) {
+  // Define as opções para a geolocalização
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 15000, // 15 segundos
+    maximumAge: 30000 // 30 segundos
+  };
+  
+  // Solicita a posição atual do usuário com base nas opções definidas
+  navigator.geolocation.getCurrentPosition(function(position) {
+    // Cria um marcador na posição atual do usuário
+    var userMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map).bindPopup("Onde você está", { closeOnClick: false });
+    // Move o centro do mapa para a posição do usuário
+    map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
+  }, function(error) {
+    console.error(error);
+  }, options);
+} else {
+  console.error("Geolocalização não suportada pelo navegador.");
+}
+    }
+
+    // Chama a função para criar o mapa
+    initMap();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
