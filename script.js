@@ -1,14 +1,15 @@
 //tela loading
 // Seleciona o elemento de carregamento pelo ID
 const loadingElement = document.getElementById('loading');
+const list = document.getElementById('list');
 
 // Define uma função para ocultar o elemento de carregamento
 function hideLoading() {
   loadingElement.style.display = 'none';
 }
 
-// Usa o setTimeout para aguardar 5 segundos antes de ocultar o elemento de carregamento
-setTimeout(hideLoading, 3000);
+// Usa o setTimeout definir o tempo
+setTimeout(hideLoading, 2000);
 
 
 
@@ -56,6 +57,28 @@ setTimeout(hideLoading, 3000);
 //sugestões
 const input = document.getElementById('input');
 const suggestions = document.querySelector('.suggestions');
+const inputText = document.getElementById('input');
+inputText.addEventListener('touchstart', function(e) {
+
+  input.addEventListener('input', () => {
+    const query = input.value.trim();
+  
+    if (query !== '') {
+      suggestions.style.display = 'block';
+    } else {
+      suggestions.style.display = 'none';
+    }
+  });
+  
+  suggestions.addEventListener('click', (event) => {
+    const selected = event.target.innerText;
+    input.value = selected;
+    suggestions.style.display = 'none';
+  });
+
+    
+});
+
 
 input.addEventListener('input', () => {
   const query = input.value.trim();
@@ -72,27 +95,6 @@ suggestions.addEventListener('click', (event) => {
   input.value = selected;
   suggestions.style.display = 'none';
 });
-
-
-
-/* const input = document.querySelector('input');
-const suggestions = document.querySelector('.suggestions');
-
-input.addEventListener('input', () => {
-  const query = input.value.trim();
-
-  if (query !== '') {
-    suggestions.style.display = 'block';
-  } else {
-    suggestions.style.display = 'none';
-  }
-});
-
-suggestions.addEventListener('click', (event) => {
-  const selected = event.target.innerText;
-  input.value = selected;
-  suggestions.style.display = 'none';
-});*/
 
 //navegação
 const toggleSidebarButton = document.getElementById('toggle-nav');
@@ -102,26 +104,27 @@ toggleSidebarButton.addEventListener('click', () => {
   sidebar.classList.toggle('visible');
 });
 
-document.addEventListener('click', (event) => {
-  if (!event.target.closest('.sidebar') && !event.target.closest('#toggle-nav')) {
+function hideSidebarOnSmallScreen() {
+  if (window.innerWidth < 768) {
     sidebar.classList.remove('visible');
   }
+}
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.sidebar') && !event.target.closest('#toggle-nav')) {
+    hideSidebarOnSmallScreen();
+  }
+});
+
+window.addEventListener('resize', () => {
+  hideSidebarOnSmallScreen();
 });
 
 
 
 
-  // Calcular a distância para um marcador na posição [-23.5489, -46.6388]
-  var lat2 = -23.5489;
-  var lon2 = -46.6388;
-  var R = 6371; // raio médio da Terra em km
-  var dLat = (lat2 - lat1) * Math.PI / 180;
-  var dLon = (lon2 - lon1) * Math.PI / 180;
-  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-          Math.sin(dLon/2) * Math.sin(dLon/2);
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  var distance = R * c;
 
-  console.log("Distância para o marcador: " + distance + " km");
-;
+
+
+
+
