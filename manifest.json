@@ -1,0 +1,67 @@
+{
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "description": "O aplicativo será desenvolvido para dispositivos móveis, com sistema operacional Android e iOS. Os usuários poderão fazer buscas por locais para a prática de exercícios físicos em Recife por categoria, como corrida, caminhada, ciclismo, entre outros. Os resultados da busca irão apresentar informações detalhadas sobre cada local, incluindo horários de funcionamento, disponibilidade de banheiros e vestiários, acessibilidade para pessoas com deficiência, entre outros.",
+  "display": "standalone",
+  "name": "MAPFIT",
+  "orientation": "portrait",
+  "short_name": "MAPFIT",
+  "id": "",
+  "theme_color": "#ff0000",
+  "categories": [
+    "sports",
+    "news"
+  ],
+  "icons": [
+    {
+      "src": "images/nba-logo.ico"
+    },
+    {
+      "src": "mapfit map/IMG/Icones/IconsManifest/Assets.xcassets/AppIcon.appiconset/128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "mapfit map/IMG/Icones/IconsManifest/Assets.xcassets/AppIcon.appiconset/144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "mapfit map/IMG/Icones/IconsManifest/Assets.xcassets/AppIcon.appiconset/152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "mapfit map/IMG/Icones/IconsManifest/Assets.xcassets/AppIcon.appiconset/167.png",
+      "sizes": "167x167",
+      "type": "image/png"
+    },
+    {
+      "src": "mapfit map/IMG/Icones/IconsManifest/Assets.xcassets/AppIcon.appiconset/180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "mapfit map/IMG/Icones/IconsManifest/Assets.xcassets/AppIcon.appiconset/196.png",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "mapfit map/IMG/Icones/IconsManifest/Assets.xcassets/AppIcon.appiconset/256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "mapfit map/IMG/Icones/IconsManifest/Assets.xcassets/AppIcon.appiconset/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [],
+  "lang": "pt",
+  "serviceworker": {
+    "src": "mapfit mp/service-worker.js",
+    "scope": "/"
+  }
+}

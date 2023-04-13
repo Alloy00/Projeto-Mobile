@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+  <title>MapFit</title>
+  <meta charset="utf-8">
+  <link href="mapfit/assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css">
+  <link rel="stylesheet" href="/mapfit map/style.css" />
+  <link rel="manifest" href="/manifest.json">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* Estilos para o mapa */
+    #map {
+      height: 100vh;
+      width: 100%;
+      border: none;
+      box-shadow: none;
+    }
+  </style>
+</head>
+
+
+<body>
+
+
+<!--
+    <div id="loading" style="z-index: 10002;">
+    <img class="logo" src="/IMG/MapFit-removebg.png">
+    </div>
+  -->   
+ <!--visualização do mapa e navbar -->
+
+<div class="container" style="z-index: 90;">
+  <input type="text" id="search-input" class="" placeholder="Pesquisar locais...">
+  <ul id="search-results"></ul>
+</div>
+ <div id="map" name="map" style="z-index: 0;"> 
+ </div>
+  
+ <button id="toggle-nav" class="floating-button" aria-label=" ">
+  <span>=</span>
+</button>
+    
+    <div class="sidebar visible" style="z-index: 200;">
+      <ul>
+        <li><a href="/mapfit/inicio.html">Menu</a></li>
+        <li><a href="/mapfit/inicio.html"></a></li>
+        <li><a href="/mapfit/inicio.html"></a></li>
+        <li><a href="/mapfit/inicio.html"></a></li>
+        <li><a href="/mapfit/inicio.html"></a></li>
+      </ul>
+      <img  class="logo" src="/mapfit map/IMG/MapFit-removebg - Copiaaa.png">
+    </div>
+  </div>
+
+ 
+
+   
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+  <!-- Todo script do mapa abaixo:-->
+  <script>
+
+    function initMap() {
+      
+      
+      // Criação de icones
+      var MyLocation = L.icon({
+          iconUrl: '/mapfit map/IMG/gps.png',
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+        var Bike = L.icon({
+          iconUrl: '/mapfit map/IMG/bicycle-solid.svg',
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+        var park = L.icon({
+          iconUrl: '/mapfit map/IMG/Icones/park.svg',
+          iconSize: [50, 50],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+        var gym = L.icon({
+          iconUrl: '/mapfit map/IMG/Icones/location.svg',
+          iconSize: [35, 35],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+
+        var compaz = L.icon({
+          iconUrl: '/mapfit map/IMG/Icones/location-_1_.svg',
+          iconSize: [35, 35],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+      // Cria o mapa e marcação
+      var map = L.map('map').setView([-23.5489, -46.6388], 16);
+      
+
+//Criando marcação somente dos parques do JSON
+fetch('/mapfit map/Dadosrecife.json')
+  .then(response => response.json())
+  .then(data => {
+    
+    data.records.forEach(function(record) {
+      var tipo_equip_urbano = record[2];
+
+      if (tipo_equip_urbano === 'Parque') {
+        var latitude = record[11];
+        var longitude = record[12];
+        var name = record[6];
+
+        var marker = L.marker([latitude, longitude], {icon:park}).addTo(map);
+        marker.bindPopup(name + `<br><a class='centered-link' href='https://www.google.com/maps/search/${latitude},${longitude}/'>Ver rota</a>`);
+
+        // Adicionando marcação na lista de resultados
+        const listItem = document.createElement('li');
+        const searchInput = document.querySelector('#search-input');
+        const searchResults = document.querySelector('#search-results');
+
+        listItem.textContent = name;
+        listItem.setAttribute('data-link', `<a class='centered-link' href='https://www.google.com/maps/search/${latitude},${longitude}/'>Ver rota</a>`);
+        listItem.addEventListener('click', () => {
+          map.setView([latitude, longitude], 18);
+          marker.bindPopup(name + listItem.getAttribute('data-link')).openPopup();
+          searchInput.value = "";
+          searchResults.style.display = 'none';
+        });
+        searchResults.appendChild(listItem);
+      }
+    });
+  })
+  .catch(error => {
+    console.error('Erro ao carregar arquivo JSON dos PARQUES:', error);
+  });
+
+//Criando marcação dos compaz
+var data = {
+  resource_id: 'e774a0fd-730f-4636-a5da-161ea8beff5a', // the resource id
+  limit: 5, // get 5 results
+  q: 'jones' // query for 'jones'
+};
+
+
+//Criando marcação para os compaz
+fetch('/mapfit map/Compaz.json')
+    .then(response => response.json())
+    .then(data => {
+      data.records.forEach(function(record) {
+        var latitude2 = record[6];
+        var longitude2 = record[7];
+        var nome = record[1];
+        var descricao = record[12];
+  
+        var marker = L.marker([latitude2, longitude2], {icon:compaz}).addTo(map);
+        marker.bindPopup(nome + `<br><a class='centered-link' href='https://www.google.com/maps/search/${latitude2},${longitude2}/'>Ver rota</a>` );
+      });
+    })
+    .catch(error => {
+      console.error('Erro ao carregar arquivo JSON dos compaz:', error);
+    });
+
+
+
+
+
+ //Criando marcação para as academias da cidade
+ fetch('/mapfit map/academias.json')
+    .then(response => response.json())
+    .then(data => {
+      data.records.forEach(function(record) {
+        var latitude2 = record[16];
+        var longitude2 = record[17];
+        var nome = record[1];
+        var descricao = record[12];
+  
+        var marker = L.marker([latitude2, longitude2], {icon:gym}).addTo(map);
+        marker.bindPopup(nome + `<br><a class='centered-link' href='https://www.google.com/maps/search/${latitude2},${longitude2}/'>Ver rota</a>` );
+      });
+    })
+    .catch(error => {
+      console.error('Erro ao carregar arquivo JSON das academias:', error);
+    });
+
+
+
+
+
+//Mapa em geral
+
+      // Adiciona o layer do OpenStreetMap/ configurações do mapa
+      //Estilo 1:
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    maxZoom: 60,
+}).addTo(map);
+
+      // Verifica se o navegador suporta geolocalização
+      if (navigator.geolocation) {
+  // Define as opções para a geolocalização
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 15000, // 15 segundos
+    maximumAge: 30000 // 30 segundos
+  };
+  
+  // Solicita a posição atual do usuário com base nas opções definidas
+  navigator.geolocation.getCurrentPosition(function(position) {
+    // Cria um marcador na posição atual do usuário
+    var userMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map).bindPopup("Onde você está", { closeOnClick: false });
+    // Move o centro do mapa para a posição do usuário
+    map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
+  }, function(error) {
+    console.error(error);
+  }, options);
+} else {
+  console.error("Geolocalização não suportada pelo navegador.");
+}
+    }
+
+    // Chama a função para criar o mapa
+    initMap();
+    
+  </script>
+  <script src="/mapfit map/script.js"></script>
+  <script src="/service-worker.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+      console.log('Service Worker registrado com sucesso:', registration.scope);
+      }).catch(function(error) {
+      console.log('Falha ao registrar o Service Worker:', error);
+      });
+    }
+    </script>
+  
+</body>
+</html>
