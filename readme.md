@@ -5,7 +5,7 @@ parques e locais públicos para prática de exercícios físicos
 
 ## Acesso
 
-[MAPFIT](https:mapfitt.netlify.app)
+<a href=“https://mapfitt.netlify.app/“>MAPFIT</a>
 
 
 ## Ferramenteas/Linguagens utilizadas
