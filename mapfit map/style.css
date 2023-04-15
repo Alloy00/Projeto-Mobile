@@ -1,12 +1,28 @@
+body {
+  
+  color: #444444;
+  font-size: 15px;
+  line-height: 1.0;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 html{
-  border: none;
+  
+  overflow-x: hidden;
+  overflow-Y: hidden;
   box-shadow: none;
+
 }
 
 #loading {
@@ -43,7 +59,7 @@ html{
 .container{
   position: absolute;
   width: 50%;
-  top: 5%;
+  top: 15%;
   left: 26%;
   background-color: white;
   border-top-left-radius: 15px;
@@ -55,6 +71,8 @@ html{
   width: 100%;
   height: 300%;
 }
+
+
 
 .centered-link {
   text-align: center;
@@ -225,7 +243,7 @@ html{
   @media (max-width: 768px) {
     .navstyle {
       width: 60%;
-      top: 5%;
+      top: 15%;
       padding: 5px;
       font-size: 16px;
     }
@@ -243,9 +261,162 @@ html{
       max-width: 80%;
       max-height: 60%;
     }
-    .container{
-      top: 3%;
-      left: 25%;
+    .container {
+      position: absolute;
+      top: 12.5%;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+    .logoo{
+      border-bottom: none; 
     }
   }
   
+  nav {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    height: 10vh;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    padding: 0 130px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo img {
+    height: 0px;
+  }
+  
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  .nav-links li {
+    list-style: none;
+  }
+  
+  .nav-links a {
+    color: #000000;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px 10px; /* altere o valor aqui */
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: #20c997;
+    position: relative;
+    border-bottom: 2px solid #20c997;
+  }
+  
+  .nav-links a.active::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    border-bottom: 1px solid #20c997;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .burger {
+    display: none;
+    cursor: pointer;
+    
+  }
+  
+  .burger div {
+    width: 20px;
+    height: 1px;
+    background-color: #000000;
+    margin: 5px;
+    transition: all 0.3s ease;
+    
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .nav-links {
+      position: fixed;
+      padding: 50px;
+      height: 50vh;
+      width: 100%;
+      flex-direction:column;
+      background-color: #ffffff;
+      top: 80px;
+      left: -100%;
+      transition: all 0.3s ease;
+      
+    }
+  
+    .nav-links li {
+      font-size: 5px;
+      
+      width: 50%;
+      text-align: center;
+    }
+  
+    .nav-links a {
+      padding: 5px 1px;
+      border-radius: 0;
+      display: block;
+      
+    }
+  
+    .burger {
+      position: relative;
+      display: block;
+      left: 85%;
+    }
+    html{
+  
+      overflow-x: hidden;
+      overflow-Y: hidden;
+      box-shadow: none;
+    
+    }
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      overflow: hidden;
+    }
+    html{
+  
+      overflow-x: hidden;
+      overflow-Y: hidden;
+      box-shadow: none;
+    
+    }
+  }
+  
+  .nav-active {
+    left: 0;
+  }
+  
+  .logoo{
+    position: relative;
+    font-size: 25px;
+    margin: 0;
+    padding: 0px;
+    right: 120px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    font-family: "Poppins", sans-serif;
+    font-style: none;
+    color: #000000;
+    border-bottom: none; 
+  }

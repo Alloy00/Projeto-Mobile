@@ -1,0 +1,8 @@
+{
+  "fields": [{"type":"int","id":"_id"},{"type":"text","id":"nome"},{"type":"text","id":"logradouro"},{"type":"text","id":"bairro"},{"type":"text","id":"cep"},{"type":"text","id":"telefone"},{"type":"numeric","id":"latitude"},{"type":"numeric","id":"longitude"}],
+  "records": [
+    [1,"Compaz Eduardo Campos","Av. Aníbal Benévolo","Água Fria","52130-210","81-3449-7777",-8.01002138153863,-34.9028952343814],
+    [2,"Compaz Escritor Ariano Suassuna","Av. General San Martin,  1208","San Martin","50761-000","81-3225-9400?",-8.0596332,-34.9260576],
+    [3,"Compaz Governador Miguel Arraes","Av. Caxangá, 953","Madalena","52171-011","",-8.05447071020751,-34.9145313032984],
+    [4,"Compaz Dom Hélder Câmara","R. Lourenço de Sá, 140","Ilha Joana Bezerra","50090-540","",-8.07349763040779,-34.895938761373]
+]}

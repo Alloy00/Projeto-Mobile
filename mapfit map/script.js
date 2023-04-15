@@ -1,4 +1,10 @@
+const menu = document.querySelector('.nav-links');
+const burger = document.querySelector('.burger');
 
+burger.addEventListener('click', () => {
+  console.log('Menu do hamburguer clicado');
+  menu.classList.toggle('nav-active');
+});
 
 //tela loading
 // Seleciona o elemento de carregamento pelo ID
@@ -71,7 +77,7 @@ function toggleSidebar() {
   }
 }
 
-toggleSidebarButton.addEventListener('click', toggleSidebar);
+
 
 //Barra de pesquisa
 const searchInput = document.querySelector('#search-input');

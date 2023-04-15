@@ -32,6 +32,27 @@
   -->   
  <!--visualização do mapa e navbar -->
 
+
+ <nav>
+  <div class="mapfit">
+    <h1 class="logoo" style="border-bottom: none" ><a class="logoo" href="inicio.html" style="border-bottom: none"></span></a>MAPFIT<span style="color: #20c997; ">.</span></a></h1>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Início</a></li>
+    <li><a href="/mapfit/inicio.html/#services">Locais</a></li>
+    <li><a href="/mapfit/inicio.html/#portfolio">Esportes</a></li>
+    <li><a href="/mapfit/inicio.html/#faq">Perguntas</a></li>
+    <li><a href="index.html">Mapa</a></li>
+  </ul>
+  <div class="burger" style="font-weight: 300;">
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+  </div>
+</nav>
+
+ 
+
 <div class="container" style="z-index: 90;">
   <input type="text" id="search-input" class="" placeholder="Pesquisar locais...">
   <ul id="search-results"></ul>
@@ -39,10 +60,10 @@
  <div id="map" name="map" style="z-index: 0;"> 
  </div>
   
- <button id="toggle-nav" class="floating-button" aria-label=" ">
+<!--  <button id="toggle-nav" class="floating-button" aria-label=" ">
   <span>=</span>
 </button>
-    
+-->  
     <div class="sidebar visible" style="z-index: 200;">
       <ul>
         <li><a href="/mapfit/inicio.html">Menu</a></li>
@@ -222,9 +243,13 @@ fetch('/mapfit map/Compaz.json')
 }
     }
 
+
+
     // Chama a função para criar o mapa
     initMap();
     
+
+
   </script>
   <script src="/mapfit map/script.js"></script>
   <script src="/service-worker.js"></script>
@@ -237,6 +262,7 @@ fetch('/mapfit map/Compaz.json')
       console.log('Falha ao registrar o Service Worker:', error);
       });
     }
+    
     </script>
   
 </body>
